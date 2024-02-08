@@ -12,6 +12,7 @@ pool:
   vmImage: windows-latest
 
 steps:
+- script: ssh-add -l
 - task: InstallSSHKey@0
   inputs:
     knownHostsEntry: $(github_public_key)
