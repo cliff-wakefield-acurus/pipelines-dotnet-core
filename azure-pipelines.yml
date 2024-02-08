@@ -23,6 +23,7 @@ steps:
 - task: InstallSSHKey@0
   inputs:
     knownHostsEntry: $(github_public_key)
-    #sshPublicKey: # string. SSH Public Key. 
-    #sshPassphrase: # string. SSH Passphrase. 
     sshKeySecureFile: 'acurus_ed25519'
+
+- script: git clone git@github.com:ZENEnergy/zen.terraform.module.azure_front_door_function.git
+    
