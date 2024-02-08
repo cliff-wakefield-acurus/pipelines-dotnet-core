@@ -2,6 +2,8 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+variables:
+- group: pipeline_variables
 
 trigger:
 - master
@@ -10,6 +12,7 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- script: echo $(github_public_key)
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
@@ -17,3 +20,9 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+- task: InstallSSHKey@0
+  inputs:
+    knownHostsEntry: $(github_public_key)
+    #sshPublicKey: # string. SSH Public Key. 
+    #sshPassphrase: # string. SSH Passphrase. 
+    sshKeySecureFile: 'acurus_ed25519'
