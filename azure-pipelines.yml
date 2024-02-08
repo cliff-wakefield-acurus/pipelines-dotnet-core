@@ -12,18 +12,11 @@ pool:
   vmImage: windows-latest
 
 steps:
-- script: echo $(github_public_key)
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
 - task: InstallSSHKey@0
   inputs:
     knownHostsEntry: $(github_public_key)
-    sshKeySecureFile: 'acurus_ed25519'
+    sshPublicKey: $(acurus_ed25519_public_key)
+    sshKeySecureFile: 'acurus_ed25519_private_key'
 
 - script: git clone git@github.com:ZENEnergy/zen.terraform.module.azure_front_door_function.git
     
